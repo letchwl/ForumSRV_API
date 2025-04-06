@@ -1,5 +1,5 @@
 
-# ForumSRV (Service) API
+# ForumSRV API
 
 A **ForumSRV** é uma API REST desenvolvida em Java com Spring Boot, voltada para a criação e gerenciamento de tópicos e respostas em um sistema de fórum. Este projeto é ideal para aprender e aplicar conceitos fundamentais de desenvolvimento backend com foco em APIs modernas e escaláveis.
 

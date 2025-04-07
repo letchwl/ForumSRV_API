@@ -1,15 +1,15 @@
 # ForumSRV API
 
-API RESTful de fórum desenvolvida com Java e Spring Boot, estruturada com boas práticas como separação em camadas, uso de DTOs e retorno padronizado.
+API RESTful de fórum desenvolvida com Java e Spring Boot. Estruturada com boas práticas como separação por camadas, uso de DTOs por contexto (Create, Read, Update), entidades claras e persistência com PostgreSQL.
 
 ---
 
 ## Tecnologias Utilizadas
 
 - Java 17  
-- Spring Boot  
+- Spring Boot
 - Spring Web  
-- Spring Data JPA  
+- Spring Data JPA
 - PostgreSQL  
 - Maven  
 
@@ -18,41 +18,56 @@ API RESTful de fórum desenvolvida com Java e Spring Boot, estruturada com boas 
 ## Estrutura do Projeto
 
 com.raullalves.forum  
-├── controller            # Controladores REST  
+├── controller                   # Controladores REST  
 │   └── TopicController.java  
 │  
-├── dto                   # Data Transfer Objects  
-│   ├── CreateTopicDto.java  
-│   ├── UpdateTopicDto.java  
-│   └── TopicDto.java  
+├── dto                          # Data Transfer Objects  
+│   ├── create                   # DTOs para criação  
+│   │   └── CreateTopicDto.java  
+│   │  
+│   ├── read                     # DTOs para leitura  
+│   │   ├── ReplyDto.java  
+│   │   ├── TopicDto.java  
+│   │   └── UserDto.java  
+│   │  
+│   └── update                   # DTOs para atualização  
+│       └── UpdateTopicDto.java  
 │  
-├── model                 # Entidades JPA  
-│   └── Topic.java  
+├── model                        # Entidades JPA  
+│   ├── Reply.java  
+│   ├── Topic.java  
+│   └── User.java  
 │  
-├── repository            # Interfaces JPA  
-│   └── TopicRepository.java  
+├── repository                   # Interfaces de persistência JPA  
+│   ├── ReplyRepository.java  
+│   ├── TopicRepository.java  
+│   └── UserRepository.java  
 │  
-└── service               # Lógica de negócio  
-    └── TopicService.java  
+├── ForumApplication.java       # Classe principal da aplicação  
+│  
+└── resources  
+    ├── application.properties   # Configurações do banco  
+    └── static / templates       # (se necessário para futuramente usar Thymeleaf)  
 
 ---
 
-## Como Rodar o Projeto Localmente
+## Como Rodar Localmente
 
-1. Clone o repositório:  
+1. Clone o projeto:  
    `git clone https://github.com/seu-usuario/forum-srv-api.git`
 
-2. Navegue até o diretório do projeto:  
+2. Entre na pasta:  
    `cd forum-srv-api`
 
-3. Configure o banco de dados PostgreSQL e atualize o `application.properties`:  
+3. Configure o PostgreSQL e edite o `application.properties`:  
    ```
    spring.datasource.url=jdbc:postgresql://localhost:5432/forumdb  
    spring.datasource.username=seu-usuario  
    spring.datasource.password=sua-senha  
+   spring.jpa.hibernate.ddl-auto=update
    ```
 
-4. Rode o projeto com o Maven ou diretamente pela sua IDE.
+4. Rode o projeto com Maven ou direto pela sua IDE.
 
 ---
 
@@ -60,30 +75,39 @@ com.raullalves.forum
 
 ### Criar tópico  
 `POST /topics`  
-Corpo:  
 ```json
 {
-  "title": "Título do tópico",
-  "message": "Mensagem do tópico"
+  "title": "Título",
+  "message": "Conteúdo do tópico",
+  "userId": 1
 }
 ```
 
 ### Listar tópicos  
 `GET /topics`  
-Resposta:  
 ```json
 [
   {
     "id": 1,
-    "title": "Título",
-    "message": "Mensagem"
+    "title": "Exemplo",
+    "message": "Mensagem",
+    "author": {
+      "id": 1,
+      "name": "Letch"
+    },
+    "replies": [
+      {
+        "id": 1,
+        "message": "Resposta",
+        "author": "Outro usuário"
+      }
+    ]
   }
 ]
 ```
 
 ### Atualizar tópico  
 `PUT /topics/{id}`  
-Corpo:  
 ```json
 {
   "title": "Novo título",
@@ -96,6 +120,13 @@ Corpo:
 
 ---
 
-## Contato
+## Observações
 
-Projeto criado por Raul (Letch) para fins de aprendizado.
+- A aplicação não possui autenticação ainda (Spring Security).  
+- Ideal para aprendizado em APIs REST, Java, JPA e boas práticas de design em backend.
+
+---
+
+## Autor
+
+Desenvolvido por Raul (Letch) — 2025.

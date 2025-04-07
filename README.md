@@ -1,77 +1,133 @@
-
 # ForumSRV API
 
-A **ForumSRV** é uma API REST desenvolvida em Java com Spring Boot, voltada para a criação e gerenciamento de tópicos e respostas em um sistema de fórum. Este projeto é ideal para aprender e aplicar conceitos fundamentais de desenvolvimento backend com foco em APIs modernas e escaláveis.
+API RESTful de fÃ³rum desenvolvida com Java e Spring Boot, estruturada com boas prÃ¡ticas como separaÃ§Ã£o em camadas, uso de DTOs e retorno padronizado.
 
-## 🚀 Tecnologias Utilizadas
+---
 
-- Java 17
-- Spring Boot
-  - Spring Web
-  - Spring Data JPA
-  - Spring Security *(em breve)*
-- PostgreSQL
-- Maven
-- Postman *(para testes de requisições)*
+## Tecnologias Utilizadas
 
-## 🧠 Conceitos Praticados
+- Java 17  
+- Spring Boot  
+- Spring Web  
+- Spring Data JPA  
+- PostgreSQL  
+- Maven  
 
-- Arquitetura RESTful
-- Camadas Controller, Service e Repository
-- Uso de DTOs (Data Transfer Objects)
-- Mapeamento objeto-relacional com JPA/Hibernate
-- Validação de dados
-- Estruturação de projeto limpa e escalável
-- Criação de endpoints GET e POST
-- Tratamento de erros e responses HTTP
+---
 
-## 🗃️ Estrutura de Pacotes
+## Estrutura do Projeto
 
-```
+```plaintext
 com.raullalves.forum
-├── controller
-├── dto
-├── model
-├── repository
+â”œâ”€â”€ controller        # Controladores REST
+â”‚   â””â”€â”€ TopicController.java
+â”‚
+â”œâ”€â”€ dto               # Data Transfer Objects
+â”‚   â”œâ”€â”€ CreateTopicDto.java
+â”‚   â”œâ”€â”€ UpdateTopicDto.java
+â”‚   â””â”€â”€ TopicDto.java
+â”‚
+â”œâ”€â”€ model             # Entidades JPA
+â”‚   â””â”€â”€ Topic.java
+â”‚
+â”œâ”€â”€ repository        # Interfaces JPA
+â”‚   â””â”€â”€ TopicRepository.java
+â”‚
+â”œâ”€â”€ service           # Regras de negÃ³cio
+â”‚   â””â”€â”€ TopicService.java
+â”‚
+â””â”€â”€ ForumApplication.java
 ```
 
-## 📌 Funcionalidades
+---
 
-- 🔎 **Listar tópicos** – Endpoint GET para retornar todos os tópicos registrados.
-- 📝 **Criar tópico** – Endpoint POST com envio de título e mensagem.
-- 💬 **(em breve)** Criar e listar respostas.
-- 🔐 **(em breve)** Sistema de autenticação com Spring Security e JWT.
+## Endpoints
 
-## 🔧 Requisitos para rodar
+### `GET /topic`
+Retorna todos os tÃ³picos cadastrados.
 
-- Java 17+
-- PostgreSQL rodando com banco configurado
-- Maven
-
-## ▶️ Como rodar o projeto
-
-1. Clone o repositório:
-```bash
-git clone https://github.com/seu-usuario/forum-srv-api.git
+**Resposta:**
+```json
+[
+  {
+    "id": 1,
+    "title": "TÃ­tulo do tÃ³pico",
+    "message": "ConteÃºdo do tÃ³pico"
+  }
+]
 ```
 
-2. Configure o `application.properties` com seus dados do banco:
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/forumdb
-spring.datasource.username=seu_usuario
-spring.datasource.password=sua_senha
-spring.jpa.hibernate.ddl-auto=update
+---
+
+### `POST /topic`
+Cria um novo tÃ³pico.
+
+**Request Body:**
+```json
+{
+  "title": "Novo TÃ­tulo",
+  "mensage": "Mensagem do tÃ³pico"
+}
 ```
 
-3. Rode o projeto:
-```bash
-./mvnw spring-boot:run
+**Response:**
+```json
+{
+  "id": 2,
+  "title": "Novo TÃ­tulo",
+  "message": "Mensagem do tÃ³pico"
+}
 ```
 
-4. Teste os endpoints no Postman:
-- `GET http://localhost:8080/topic`
-- `POST http://localhost:8080/topic`
+---
 
-## ✍️ Autor
+### `PUT /topic/{id}`
+Atualiza um tÃ³pico existente.
 
-Desenvolvido por **Raul Alves (Letch)** – estudante de backend, apaixonado por Java e arquitetura de sistemas escaláveis.
+**Request Body:**
+```json
+{
+  "title": "TÃ­tulo atualizado",
+  "message": "Mensagem atualizada"
+}
+```
+
+**Response:**
+```json
+{
+  "id": 1,
+  "title": "TÃ­tulo atualizado",
+  "message": "Mensagem atualizada"
+}
+```
+
+---
+
+### `DELETE /topic/{id}`
+Remove um tÃ³pico pelo ID.
+
+**Response:** `204 No Content`
+
+---
+
+## Boas PrÃ¡ticas Aplicadas
+
+- DTOs para transferÃªncia de dados  
+- Retorno com `ResponseEntity`  
+- SeparaÃ§Ã£o por camadas: Controller, Service, Repository, DTO, Model  
+- Uso de anotaÃ§Ãµes Spring como `@RestController`, `@Service`, `@Repository`  
+- RequisiÃ§Ãµes com `@RequestBody` e `@PathVariable`
+
+---
+
+## Futuras ImplementaÃ§Ãµes
+
+- IntegraÃ§Ã£o com PostgreSQL completa  
+- ValidaÃ§Ãµes com Bean Validation (`@Valid`)  
+- Swagger/OpenAPI para documentaÃ§Ã£o automÃ¡tica  
+- Spring Security para autenticaÃ§Ã£o e autorizaÃ§Ã£o  
+- CriaÃ§Ã£o de usuÃ¡rios e comentÃ¡rios nos tÃ³picos
+
+---
+
+**Desenvolvido por Letch (Raul)** â€” Projeto de estudo com Spring Boot.

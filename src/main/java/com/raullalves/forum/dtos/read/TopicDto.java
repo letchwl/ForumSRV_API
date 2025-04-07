@@ -1,16 +1,19 @@
-package com.raullalves.forum.dto;
+package com.raullalves.forum.dtos.read;
 
 import com.raullalves.forum.model.Topic;
 
 public record TopicDto(
         Long id,
         String title,
-        String menssage) {
+        String message) {
 
         public TopicDto(Topic topic) {
                 this(topic.getId(),
                         topic.getTitle(),
-                        topic.getMenssage());
+                        topic.getMessage());
         }
 
+        public Long getId() {
+                return id();
+        }
 }

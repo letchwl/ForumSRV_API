@@ -1,9 +1,11 @@
 package com.raullalves.forum.controller;
 
-import com.raullalves.forum.dto.TopicDto;
+import com.raullalves.forum.dtos.create.CreateTopicDto;
+import com.raullalves.forum.dtos.read.TopicDto;
+import com.raullalves.forum.dtos.update.UpdateTopicDto;
 import com.raullalves.forum.model.Topic;
 import com.raullalves.forum.repository.TopicRepository;
-import jakarta.validation.Valid;
+import com.raullalves.forum.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,25 +18,33 @@ import java.util.List;
 public class TopicController {
 
     @Autowired
-    private TopicRepository repository;
-
-    @PostMapping
-    public ResponseEntity create(@RequestBody TopicDto dto, UriComponentsBuilder uriBuilder) {
-        Topic topic = new Topic();
-        topic.setTitle(dto.title());
-        topic.setMenssage(dto.menssage());
-        repository.save(topic);
-
-        var uri = uriBuilder.path("/topic/create/{id}").buildAndExpand(topic.getId()).toUri();
-
-        return ResponseEntity.created(uri).build();
-    }
+    private TopicService service;
 
     @GetMapping
-    public List<TopicDto> list() {
-        return repository.findAll().stream()
-                .map(topic -> new TopicDto(topic.getId(), topic.getTitle(), topic.getMenssage()))
-                .toList();
+    public ResponseEntity<List<TopicDto>> list() {
+      service.list();
+      return ResponseEntity.ok().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<TopicDto> create(@RequestBody CreateTopicDto dto, UriComponentsBuilder uriBuilder) {
+        TopicDto topic = service.create(dto);
+        var uri = uriBuilder.path("/topic/create/{id}").buildAndExpand(topic.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(topic);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TopicDto> update(
+            @PathVariable Long id,
+            @RequestBody UpdateTopicDto dto) {
+        return ResponseEntity.ok(service.update(id, dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

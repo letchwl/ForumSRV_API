@@ -1,6 +1,6 @@
 package com.raullalves.forum.model;
 
-import com.raullalves.forum.dto.TopicDto;
+import com.raullalves.forum.dtos.read.TopicDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,13 +20,13 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
-    private String menssage;
+    private String message;
 
     public Topic() {}
 
     public Topic(TopicDto dados) {
         this.title = dados.title();
-        this.menssage = dados.menssage();
+        this.message = dados.message();
     }
 
     @ManyToOne
@@ -43,8 +43,8 @@ public class Topic {
         return title;
     }
 
-    public String getMenssage() {
-        return menssage;
+    public String getMessage() {
+        return message;
     }
 
     public void setId(long id) {
@@ -55,7 +55,7 @@ public class Topic {
         this.title = title;
     }
 
-    public void setMenssage(String menssage) {
-        this.menssage = menssage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

@@ -1,4 +1,4 @@
-package com.raullalves.forum.dto;
+package com.raullalves.forum.dtos.read;
 
 import com.raullalves.forum.model.User;
 

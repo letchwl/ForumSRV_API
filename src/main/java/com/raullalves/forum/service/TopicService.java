@@ -1,8 +1,8 @@
 package com.raullalves.forum.service;
 
-import com.raullalves.forum.dtos.create.CreateTopicDto;
-import com.raullalves.forum.dtos.read.TopicDto;
-import com.raullalves.forum.dtos.update.UpdateTopicDto;
+import com.raullalves.forum.dtos.topic.CreateTopicDto;
+import com.raullalves.forum.dtos.topic.TopicDto;
+import com.raullalves.forum.dtos.topic.UpdateTopicDto;
 import com.raullalves.forum.model.Topic;
 import com.raullalves.forum.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;

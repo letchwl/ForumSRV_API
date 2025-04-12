@@ -1,4 +1,4 @@
-package com.raullalves.forum.dtos.read;
+package com.raullalves.forum.dtos.topic;
 
 import com.raullalves.forum.model.Topic;
 

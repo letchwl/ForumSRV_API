@@ -1,4 +1,4 @@
-package com.raullalves.forum.dtos.read;
+package com.raullalves.forum.dtos.user;
 
 import com.raullalves.forum.model.User;
 
@@ -9,7 +9,7 @@ public record UserDto(Long id,
 
     public UserDto(User user) {
         this(user.getId(),
-                user.getName(),
+                user.getUsername(),
                 user.getEmail(),
                 user.getPassword());
     }

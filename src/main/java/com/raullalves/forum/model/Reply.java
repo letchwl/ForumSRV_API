@@ -1,16 +1,11 @@
 package com.raullalves.forum.model;
 
-
-import com.raullalves.forum.dtos.read.ReplyDto;
+import com.raullalves.forum.dtos.reply.ReplyResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity(name = "reply")
 @Table(name = "replys")
@@ -18,20 +13,25 @@ public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String message;
-    private LocalDateTime creationDate = LocalDateTime.now();
+    private String author;
+    private String content;
+    private LocalDateTime createdAt = LocalDateTime.now();
+    private boolean ativo = true;
 
     public Reply() {}
 
-    public Reply(ReplyDto dados) {
-
+    public Reply(ReplyResponse dados) {
+        this.id = dados.id();
+        this.author = dados.authorUsername();
+        this.content = dados.content();
+        this.createdAt = dados.createdAt();
     }
 
     @ManyToOne
     private Topic topic;
 
     @ManyToOne
-    private User user;
+    private User Author;
 
     public Long getId() {
         return id;
@@ -41,19 +41,47 @@ public class Reply {
         this.id = id;
     }
 
-    public String getMessage() {
-        return message;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setAuthor(User author) {
+        Author = author;
     }
 
-    public LocalDateTime getCreationDate() {
-        return creationDate;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

@@ -1,6 +1,6 @@
 package com.raullalves.forum.model;
 
-import com.raullalves.forum.dtos.read.TopicDto;
+import com.raullalves.forum.dtos.topic.TopicDto;
 import jakarta.persistence.*;
 import lombok.*;
 

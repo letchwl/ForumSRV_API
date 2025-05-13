@@ -15,49 +15,13 @@ API RESTful de fórum desenvolvida com Java e Spring Boot. Estruturada com boas 
 
 ---
 
-## Estrutura do Projeto
-
-com.raullalves.forum  
-├── controller                   # Controladores REST  
-│   └── TopicController.java  
-│  
-├── dto                          # Data Transfer Objects  
-│   ├── create                   # DTOs para criação  
-│   │   └── CreateTopicDto.java  
-│   │  
-│   ├── read                     # DTOs para leitura  
-│   │   ├── ReplyDto.java  
-│   │   ├── TopicDto.java  
-│   │   └── UserDto.java  
-│   │  
-│   └── update                   # DTOs para atualização  
-│       └── UpdateTopicDto.java  
-│  
-├── model                        # Entidades JPA  
-│   ├── Reply.java  
-│   ├── Topic.java  
-│   └── User.java  
-│  
-├── repository                   # Interfaces de persistência JPA  
-│   ├── ReplyRepository.java  
-│   ├── TopicRepository.java  
-│   └── UserRepository.java  
-│  
-├── ForumApplication.java       # Classe principal da aplicação  
-│  
-└── resources  
-    ├── application.properties   # Configurações do banco  
-    └── static / templates       # (se necessário para futuramente usar Thymeleaf)  
-
----
-
 ## Como Rodar Localmente
 
 1. Clone o projeto:  
-   `git clone https://github.com/seu-usuario/forum-srv-api.git`
+   `git clone https://github.com/lectchwl/ForumSRV_API.git`
 
 2. Entre na pasta:  
-   `cd forum-srv-api`
+   `cd ForumSRV_API`
 
 3. Configure o PostgreSQL e edite o `application.properties`:  
    ```

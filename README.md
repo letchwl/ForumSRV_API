@@ -18,7 +18,7 @@ API RESTful de fórum desenvolvida com Java e Spring Boot. Estruturada com boas 
 ## Como Rodar Localmente
 
 1. Clone o projeto:  
-   `git clone https://github.com/lectchwl/ForumSRV_API.git`
+   `git clone https://github.com/letchwl/ForumSRV_API.git`
 
 2. Entre na pasta:  
    `cd ForumSRV_API`
